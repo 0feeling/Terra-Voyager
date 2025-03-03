@@ -5,7 +5,8 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-blue-500 to-green-500 p-4 shadow-md">
       <div className="max-w-full mx-auto flex justify-between items-center">
         <div className="text-white text-2xl font-semibold flex items-center">
-          <span className="mr-2">🌍</span> Terra Voyager
+          {" "}
+          Terra Voyager
         </div>
         <div className="space-x-6">
           <Link

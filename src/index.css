@@ -11,6 +11,7 @@
   color: rgba(255, 255, 255, 0.87);
   background-image: url("https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_1280.png");
   background-position: center;
+  background-color: #000000;
   background-repeat: no-repeat;
   background-size: cover;
   font-synthesis: none;
@@ -54,6 +55,8 @@ button {
 }
 button:hover {
   border-color: #646cff;
+  color: white;
+  background: rgb(7, 19, 189);
 }
 button:focus,
 button:focus-visible {

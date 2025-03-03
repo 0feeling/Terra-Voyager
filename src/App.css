@@ -15,7 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: #000000;
   border-radius: 12px; /* Pour adoucir les coins */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ajout d'un léger ombre */
 }

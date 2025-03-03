@@ -1,6 +1,5 @@
 import RandomCountryByContinent from "../components/RandomCountryByContinent";
 
-// Exemple d'utilisation dans Home.jsx
 const Home = () => {
   return (
     <div className="text-center justify-center">
