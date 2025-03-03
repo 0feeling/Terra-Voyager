@@ -1,42 +1,29 @@
-#root {
-  width: 100%; /* Utilise la largeur totale */
-  height: 100vh; /* Utilise la hauteur totale de la fenêtre */
-  margin: 0;
-  padding: 0;
+.image-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Disposition verticale */
+  gap: 30px; /* Espacement entre les images */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Cache les débordements */
+  background-color: black; /* Fond pour éviter les vides */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.image-container div {
+  width: 30%; /* Chaque image dans une div, taille responsive */
+  height: 100px; /* Taille fixe pour chaque image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px; /* Pour adoucir les coins */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ajout d'un léger ombre */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.image-container img {
+  margin: 9px;
+  width: 80%; /* Prendre toute la largeur de la div */
+  height: 800%; /* Prendre toute la hauteur de la div */
+  object-fit: cover; /* Ajuste l’image pour occuper tout l’espace */
+  border-radius: 12px; /* Adoucir les coins de l’image */
 }

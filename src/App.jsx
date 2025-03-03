@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import RandomCountryByContinent from "./components/RandomCountryByContinent";
 import Navbar from "./components/Navbar";
-
+import "./App.css";
 function App() {
   return (
     <div>

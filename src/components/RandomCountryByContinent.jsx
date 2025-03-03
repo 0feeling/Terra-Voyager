@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import CountryImages from "./CountryImages"; // Assure-toi d'importer ce nouveau composant
+import CountryImages from "./CountryImages";
 
 const RandomCountryByContinent = () => {
   const [continent, setContinent] = useState("");
@@ -18,7 +18,7 @@ const RandomCountryByContinent = () => {
   ];
 
   const getRandomContinent = () => {
-    const randomIndex = Math.floor(Math.random() * 5); // Choisit un continent aléatoire (pas "Random")
+    const randomIndex = Math.floor(Math.random() * 5);
     setContinent(continents[randomIndex]);
   };
 
@@ -64,41 +64,39 @@ const RandomCountryByContinent = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Découvrir un pays aléatoire</h1>
-      <div>
-        <label htmlFor="continent">Choisir un continent : </label>
-        <select
-          id="continent"
-          value={continent}
-          onChange={handleContinentChange}
-        >
-          <option value="">-- Sélectionner un continent --</option>
-          {continents.map((continentOption, index) => (
-            <option key={index} value={continentOption}>
-              {continentOption === "Random"
-                ? "Continent Aléatoire"
-                : continentOption}
-            </option>
-          ))}
-        </select>
+    <div className="text-center items-center">
+      <h1 className="m-8 text-white bg-black text-center items-center">
+        Discover a random country
+      </h1>
+      <div className="m-8 border-spacing-2 border-blue-800">
+        <label>
+          <select onChange={handleContinentChange}>
+            <option value=""> List of continents </option>
+            {continents.map((continentOption, index) => (
+              <option key={index} value={continentOption}>
+                {continentOption === "Random"
+                  ? "Random Continent"
+                  : continentOption}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
 
       {continent && !loading && continent !== "Random" && (
-        <div>
-          <p>
-            <strong>Continent choisi :</strong> {continent}
-          </p>
-          <button onClick={getRandomCountry}>Choisir un pays aléatoire</button>
+        <div className="m-8">
+          <h2 className="text-white bg-black">
+            Selected continent : {continent}
+          </h2>
+          <button onClick={getRandomCountry}>Go for a random country</button>
         </div>
       )}
 
-      {loading && <p>Chargement des pays...</p>}
+      {loading && <div>Loading country...</div>}
 
       {country && !loading && (
-        <div>
-          <h2>Pays choisi :</h2>
-          <p>{country}</p>
+        <div className="m-8">
+          <h2 className="text-white bg-black">Choosen country : {country}</h2>
           <CountryImages country={country} />
         </div>
       )}
