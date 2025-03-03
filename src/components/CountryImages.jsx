@@ -20,7 +20,7 @@ const CountryImages = ({ country }) => {
           console.log(response.data);
           setImages(response.data.items);
         } catch (err) {
-          setError("Erreur lors du chargement des images");
+          setError("Nombre de requêtes dépassé");
         } finally {
           setLoading(false);
         }

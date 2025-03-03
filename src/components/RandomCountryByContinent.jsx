@@ -65,13 +65,16 @@ const RandomCountryByContinent = () => {
 
   return (
     <div className="text-center items-center">
-      <h1 className="m-8 text-white bg-black text-center items-center">
+      <h1 className="m-8 text-white bg-black text-center px-4 py-2 inline-block">
         Discover a random country
       </h1>
       <div className="m-8 border-spacing-2 border-blue-800">
         <label>
-          <select onChange={handleContinentChange}>
-            <option value=""> List of continents </option>
+          <select
+            onChange={handleContinentChange}
+            className="bg-black text-white px-4 py-2 rounded-md"
+          >
+            <option value="">List of continents</option>
             {continents.map((continentOption, index) => (
               <option key={index} value={continentOption}>
                 {continentOption === "Random"
@@ -85,7 +88,7 @@ const RandomCountryByContinent = () => {
 
       {continent && !loading && continent !== "Random" && (
         <div className="m-8">
-          <h2 className="text-white bg-black">
+          <h2 className="text-white bg-black px-4 py-2 items-center justify-center inline-block col-span-1">
             Selected continent : {continent}
           </h2>
           <button onClick={getRandomCountry}>Go for a random country</button>
