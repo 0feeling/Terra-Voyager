@@ -15,7 +15,7 @@ const CountryImages = ({ country }) => {
         setLoading(true);
         setImages([]); // Réinitialiser les images avant de commencer une nouvelle recherche
         try {
-          const url = `https://www.googleapis.com/customsearch/v1?q=${country} (landscape OR nature OR scenic OR view OR city OR urban) -site:shutterstock.com -site:istockphoto.com -site:adobestock.com -site:gettyimages.com -site:bigstockphoto.com -site:depositphotos.com -site:123rf.com -site:dreamstime.com -site:alamy.com -site:fotolia.com -site:etsystatic.com -inurl:santorini.jpg -site:royalcaribbean.com -site:envato.com -watermark -AI -generated -artificial -DALL·E -MidJourney -stock -small -lowres -generic -excessivebranding&cx=${cx}&key=${googleApiKey}&searchType=image&num=3&imgSize=large&imgType=photo`;
+          const url = `https://www.googleapis.com/customsearch/v1?q=${country} (landscape OR nature OR scenic OR view) -site:shutterstock.com -site:istockphoto.com -site:adobestock.com -site:gettyimages.com -site:bigstockphoto.com -site:depositphotos.com -site:123rf.com -site:dreamstime.com -site:alamy.com -site:fotolia.com -site:etsystatic.com -inurl:santorini.jpg -site:royalcaribbean.com -site:envato.com -watermark -AI -generated -artificial -DALL·E -MidJourney -stock -small -lowres -generic -excessivebranding&cx=${cx}&key=${googleApiKey}&searchType=image&num=3&imgSize=large&imgType=photo`;
           const response = await axios.get(url);
           console.log(response.data);
           setImages(response.data.items);
