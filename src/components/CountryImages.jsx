@@ -15,7 +15,9 @@ const CountryImages = ({ country }) => {
         setLoading(true);
         setImages([]); // Réinitialiser les images avant de commencer une nouvelle recherche
         try {
-          const url = `https://www.googleapis.com/customsearch/v1?q=${country} (landscape OR nature OR scenic OR view) -site:shutterstock.com -site:istockphoto.com -site:adobestock.com -site:gettyimages.com -site:bigstockphoto.com -site:depositphotos.com -site:123rf.com -site:dreamstime.com -site:alamy.com -site:fotolia.com -site:etsystatic.com -inurl:santorini.jpg -site:royalcaribbean.com -site:envato.com -watermark -AI -generated -artificial -DALL·E -MidJourney -stock -small -lowres -generic -excessivebranding&cx=${cx}&key=${googleApiKey}&searchType=image&num=3&imgSize=large&imgType=photo`;
+          const query = `"${country}" ("beautiful landscape" OR "natural scenery" OR "breathtaking view") -site:shutterstock.com -site:istockphoto.com -site:adobestock.com -site:gettyimages.com -site:bigstockphoto.com -site:depositphotos.com -site:123rf.com -site:dreamstime.com -site:alamy.com -site:fotolia.com -site:etsystatic.com -site:royalcaribbean.com -site:envato.com -site:pinterest.com -site:flickr.com -site:canva.com -site:redbubble.com -site:deviantart.com -site:freepik.com -inurl:santorini.jpg -watermark -AI -generated -artificial -DALL·E -MidJourney -stock -small -lowres -generic -excessivebranding -meme -quote -text -typography -infographic -poster -CGI -render -prompt -fantasy -conceptart`;
+
+          const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&cx=${cx}&key=${googleApiKey}&searchType=image&num=3&imgSize=large&imgType=photo`;
           const response = await axios.get(url);
           console.log(response.data);
           setImages(response.data.items);
@@ -34,7 +36,7 @@ const CountryImages = ({ country }) => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
+    <div className="text-white">
       <h2>Images of the country {country}</h2>
       {images.length > 0 ? (
         <div className="flex justify-center gap-5 flex-wrap">
