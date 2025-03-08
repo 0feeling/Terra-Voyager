@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CountryImages from "./CountryImages";
+import MapComponent from "./MapComponent";
 
 const RandomCountryByContinent = () => {
   const [continent, setContinent] = useState("");
   const [country, setCountry] = useState("");
+  const [coordinates, setCoordinates] = useState(null); // Ajouter l'état pour les coordonnées
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [prevCoordinates, setPrevCoordinates] = useState(null);
 
   const continents = [
     "Africa",
@@ -40,6 +43,32 @@ const RandomCountryByContinent = () => {
     const randomCountry =
       countries[Math.floor(Math.random() * countries.length)];
     setCountry(randomCountry.name.common);
+    getCoordinates(randomCountry.name.common); // Appeler la fonction pour obtenir les coordonnées
+  };
+
+  const getCoordinates = async (countryName) => {
+    try {
+      const response = await axios.get(
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(countryName)}&key=${import.meta.env.VITE_OPENCAGE_API_KEY}`
+      );
+      if (response.data.results.length > 0) {
+        const { lat, lng } = response.data.results[0].geometry;
+        const newCoordinates = { lat, lng };
+
+        // Vérifie si les nouvelles coordonnées sont différentes des précédentes
+        if (
+          !prevCoordinates ||
+          JSON.stringify(newCoordinates) !== JSON.stringify(prevCoordinates)
+        ) {
+          setCoordinates(newCoordinates); // Mise à jour des coordonnées
+          setPrevCoordinates(newCoordinates); // Mise à jour des coordonnées précédentes
+        }
+      } else {
+        console.error("No coordinates found for this country.");
+      }
+    } catch (error) {
+      console.error("Error fetching coordinates:", error);
+    }
   };
 
   const handleContinentChange = (e) => {
@@ -66,7 +95,7 @@ const RandomCountryByContinent = () => {
   return (
     <div className="text-center items-center">
       <h1 className="m-8 text-white bg-black text-center px-4 py-2 inline-block">
-        Discover informations about a random country
+        Discover information about a random country
       </h1>
       <div className="m-8 border-spacing-2 border-blue-800">
         <label>
@@ -99,8 +128,28 @@ const RandomCountryByContinent = () => {
 
       {country && !loading && (
         <div className="m-8">
-          <h2 className="text-white bg-black">Choosen country : {country}</h2>
+          <h2 className="text-white bg-black">Chosen country : {country}</h2>
           <CountryImages country={country} />
+
+          {/* Afficher l'iframe Wikipedia */}
+          <div className="my-8 text-white">
+            <h3>Learn more about {country}</h3>
+            <iframe
+              src={`https://en.wikipedia.org/wiki/${encodeURIComponent(country)}`}
+              width="100%"
+              height="500"
+              frameBorder="0"
+              title={`Wikipedia about ${country}`}
+            />
+          </div>
+
+          {/* Afficher la carte seulement si les coordonnées sont disponibles et non dans CountryImages */}
+          {coordinates && (
+            <MapComponent
+              coordinates={coordinates}
+              key={JSON.stringify(coordinates)}
+            />
+          )}
         </div>
       )}
     </div>

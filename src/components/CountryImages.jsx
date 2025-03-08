@@ -5,13 +5,16 @@ const CountryImages = ({ country }) => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [coordinates, setCoordinates] = useState(null);
 
   const googleApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   const cx = import.meta.env.VITE_CX_ID;
   const pexelsApiKey = import.meta.env.VITE_PEXELS_API_KEY;
+  const opencageApiKey = import.meta.env.VITE_OPENCAGE_API_KEY;
 
   useEffect(() => {
     if (country) {
+      // Récupérer les images du pays
       const fetchImages = async () => {
         setLoading(true);
         setImages([]);
@@ -19,14 +22,11 @@ const CountryImages = ({ country }) => {
 
         try {
           const query = `"${country}" ("beautiful landscape" OR "natural scenery" OR "breathtaking view")`;
-
           const randomStart = Math.random() > 0.5 ? 1 : 6; // Soit résultats 1-10, soit 6-15
           const googleUrl = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&cx=${cx}&key=${googleApiKey}&searchType=image&num=10&imgSize=large&imgType=photo&start=${randomStart}`;
 
           // Essayer d'abord avec Google API
           const googleResponse = await axios.get(googleUrl);
-          console.log(googleResponse.data); // Log de la réponse pour vérification
-
           let imageResults = googleResponse.data.items || [];
 
           if (imageResults.length === 0) {
@@ -79,7 +79,7 @@ const CountryImages = ({ country }) => {
 
   return (
     <div className="text-white">
-      <h2 className="bg-black">Images of {country}</h2>
+      <h2 className="bg-black mb-8">Images of {country}</h2>
       {images.length > 0 ? (
         <div className="flex justify-center gap-5 flex-wrap">
           {images.map((image, index) => (
@@ -93,19 +93,6 @@ const CountryImages = ({ country }) => {
         </div>
       ) : (
         <div>No images found.</div>
-      )}
-
-      {country && (
-        <div className="m-8 flex flex-col items-center">
-          <h2>More about {country}</h2>
-          <div className="flex justify-center">
-            <iframe
-              src={`https://en.wikipedia.org/wiki/${encodeURIComponent(country)}`}
-              className="w-[800px] h-[600px] border rounded-lg shadow-lg"
-              title={`Wikipedia page of ${country}`}
-            ></iframe>
-          </div>
-        </div>
       )}
     </div>
   );
