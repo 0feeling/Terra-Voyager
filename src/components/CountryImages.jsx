@@ -25,6 +25,8 @@ const CountryImages = ({ country }) => {
 
           // Essayer d'abord avec Google API
           const googleResponse = await axios.get(googleUrl);
+          console.log(googleResponse.data); // Log de la réponse pour vérification
+
           let imageResults = googleResponse.data.items || [];
 
           if (imageResults.length === 0) {
@@ -42,7 +44,6 @@ const CountryImages = ({ country }) => {
             .slice(0, 8);
           setImages(selectedImages);
         } catch (err) {
-          // Si l'appel à Google échoue, essayer avec Pexels
           console.log("Google API échouée, tentative avec Pexels...");
 
           const pexelsUrl = `https://api.pexels.com/v1/search?query=${encodeURIComponent(country)}&per_page=8&page=1`;
@@ -78,7 +79,7 @@ const CountryImages = ({ country }) => {
 
   return (
     <div className="text-white">
-      <h2>Images of {country}</h2>
+      <h2 className="bg-black">Images of {country}</h2>
       {images.length > 0 ? (
         <div className="flex justify-center gap-5 flex-wrap">
           {images.map((image, index) => (
