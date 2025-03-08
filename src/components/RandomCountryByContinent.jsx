@@ -94,7 +94,7 @@ const RandomCountryByContinent = () => {
 
   return (
     <div className="text-center items-center">
-      <h1 className="m-8 text-white bg-black text-center px-4 py-2 inline-block">
+      <h1 className="bg-gradient-to-tr pacifico-regular border-2 border-black from-yellow-400 via-pink-500 to-blue-600 px-8 py-6 m-8 text-center text-black text-6xl font-bold inline-block items-center rounded-full shadow-lg relative">
         Discover information about a random country
       </h1>
       <div className="m-8 border-spacing-2 border-blue-800">
