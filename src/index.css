@@ -7,7 +7,7 @@
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-image: url(src/assets/valise.jpg);
+  background-image: url(/src/assets/valise.jpg);
   background-position: center;
   background-color: #000000;
   background-repeat: repeat;
